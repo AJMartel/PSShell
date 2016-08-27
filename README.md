@@ -24,7 +24,7 @@ Successfully installed 'UnmanagedExports 1.2.7'.
 Adding 'UnmanagedExports 1.2.7' to PSShell.
 Successfully added 'UnmanagedExports 1.2.7' to PSShell.
 ```
-5. Press F7
+Finally Press F7
 
 ### Release 2.0 - How to use it:
 
@@ -68,7 +68,7 @@ PSShell uses the System.Management.Automation namespace, so make sure you have t
 Just run the executables or take advantage of @subTee's InstallUtil AppLocker/White Listing bypass:
 
 ```
-:\Windows\Microsoft.NET\Framework\v4.0.30319\InstallUtil.exe /logfile= /LogToConsole=false /U PSShell.exe
+C:\Windows\Microsoft.NET\Framework\v4.0.30319\InstallUtil.exe /logfile= /LogToConsole=false /U PSShell.exe
 ```
 
 ### Credits
