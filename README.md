@@ -70,7 +70,7 @@ Just run the executables or take advantage of @subTee's InstallUtil AppLocker/Wh
 ```
 C:\Windows\Microsoft.NET\Framework\v4.0.30319\InstallUtil.exe /logfile= /LogToConsole=false /U PSShell.exe
 ```
-You can also invoke methods from .Net Assemblies using PowerShell and Reflection API. As an example run the following from a PowerShell shell. It may only be useful though if you can run powershell.exe but you aren't able to run scripts (very unlikely dut to multiple bypasses available).
+You can also invoke methods from .Net Assemblies using PowerShell and Reflection API. As an example run the following from a PowerShell shell. It may only be useful though if you can run powershell.exe but you aren't able to run scripts (very unlikely due to multiple bypasses available).
 ```
 Get-ChildItem -recurse "C:\path\to\psshell\"|Where-Object {($_.Extension -EQ ".dll") -or ($_.Extension -eq ".exe")} | ForEach-Object { $AssemblyName=$_.FullName; Try {[Reflection.Assembly]::LoadFile($AssemblyName)} Catch{ "***ERROR*** Not .NET assembly: " + $AssemblyName}} 
 [PSShell.Program]::Main()
