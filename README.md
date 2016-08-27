@@ -38,7 +38,7 @@ regsvr32 PSShell.dll
 ```
 or
 ```
-regsvr /u PSShell.dll
+regsvr32 /u PSShell.dll
 ```
 
 ### Release 1.0 - How to Compile it:
