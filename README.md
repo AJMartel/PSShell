@@ -9,7 +9,7 @@ Because it calls powershell directly through the .NET framework it might help by
 
 ### Release 2.0 - How to Compile it:
 
-To compile PSShell 2.0 you need to import this project within Microsoft Visual Studio. If you don't have access to a Visual Studio installation stick with version 1.0 for now. See below hot to build it with csc.exe.
+To compile PSShell 2.0 you need to import this project within Microsoft Visual Studio. If you don't have access to a Visual Studio installation stick with version 1.0 for now. See below how to build it with csc.exe.
 
 Since PSShell 2.0 uses [Unmanaged Exports](https://sites.google.com/site/robertgiesecke/Home/uploads/unmanagedexports) from Robert Giesecke follow the steps below to build the project.
 
@@ -73,8 +73,8 @@ C:\Windows\Microsoft.NET\Framework\v4.0.30319\InstallUtil.exe /logfile= /LogToCo
 
 ### Credits
 
-- The 'regsvr32' tricks, as usual were 'stolen' from @subTee [gists](https://gist.github.com/subTee/f6123584a3258783e497481690ccc38d).
-- The 'InstallUtil' trick, was again 'stolen' from @subTee [gists](https://gist.github.com/subTee/af5c60a07977180c8bad).
+- The 'regsvr32' tricks, as usual, were 'stolen' from @subTee [gists](https://gist.github.com/subTee/f6123584a3258783e497481690ccc38d).
+- The 'InstallUtil' trick was, again, 'stolen' from @subTee [gists](https://gist.github.com/subTee/af5c60a07977180c8bad).
 - The DLLExport is courtesy of [Robert Giesecke](https://sites.google.com/site/robertgiesecke/Home/uploads/unmanagedexports) and the idea of using it came from the following @subTee blog [post](http://subt0x10.blogspot.co.uk/2016/06/what-you-probably-didnt-know-about.html) about 'regsvr32'.
 - The code to run a console window from a Windows Application was 'stolen' from [here](https://social.msdn.microsoft.com/Forums/en-US/b7a14400-6d72-4fbf-9927-0966f69ef4a2/how-to-open-console-window-in-windows-apllication?forum=csharplanguage).
 
