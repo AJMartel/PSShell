@@ -11,7 +11,7 @@ Because it calls powershell directly through the .NET framework it might help by
 
 To compile PSShell 2.0 you need to import this project within Microsoft Visual Studio. If you don't have access to a Visual Studio installation stick with version 1.0 for now. See below hot to build it with csc.exe.
 
-Since PSShell 2.0 uses [Unmanaged Exports](https://sites.google.com/site/robertgiesecke/Home/uploads/unmanagedexports) from Robert Giesecke follow the steps bellow to build the project.
+Since PSShell 2.0 uses [Unmanaged Exports](https://sites.google.com/site/robertgiesecke/Home/uploads/unmanagedexports) from Robert Giesecke follow the steps below to build the project.
 
 1. Import the project in Visual Studio
 2. Install [NuGet Package Manager](https://docs.nuget.org/consume/installing-nuget)
